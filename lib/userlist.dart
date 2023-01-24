@@ -4,7 +4,6 @@ import 'package:newmatrimony/add_user.dart';
 import 'package:newmatrimony/database.dart';
 import 'package:newmatrimony/favourite_user.dart';
 import 'package:newmatrimony/models/user_model.dart';
-import 'package:newmatrimony/search.dart';
 
 class UserListPage extends StatefulWidget {
   @override
