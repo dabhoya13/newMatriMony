@@ -26,9 +26,9 @@ class MyDatabase {
 
     if (FileSystemEntity.typeSync(path) == FileSystemEntityType.notFound) {
       ByteData data =
-          await rootBundle.load(join('assets/database', 'mymatrimony.db'));
+      await rootBundle.load(join('assets/database', 'mymatrimony.db'));
       List<int> bytes =
-          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+      data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
       await new File(path).writeAsBytes(bytes);
     }
   }
@@ -62,7 +62,7 @@ class MyDatabase {
     List<CityModel> cityList = [];
     Database db = await initDatabase();
     List<Map<String, Object?>> data =
-        await db.rawQuery('select * from City_Tbl');
+    await db.rawQuery('select * from City_Tbl');
     CityModel model = CityModel(CityName1: 'Select City',CityID1: -1);
     model.CityID = -1;
     model.CityName='Select City';
@@ -114,7 +114,7 @@ class MyDatabase {
     List<UserModel> userList = [];
     Database db = await initDatabase();
     List<Map<String, Object?>> data =
-        await db.rawQuery('select * from Tbl_User');
+    await db.rawQuery('select * from Tbl_User');
     for(int i=0; i<data.length; i++)
     {
       UserModel model = UserModel();
