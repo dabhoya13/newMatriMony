@@ -20,6 +20,9 @@ class _UserListPageState extends State<UserListPage> {
   @override
   void initState() {
     super.initState();
+    db.copyPasteAssetFileToRoot().then((value) {
+      db.getUserListFromTbl();
+    });
   }
 
   @override
@@ -337,4 +340,3 @@ class _UserListPageState extends State<UserListPage> {
         ));
   }
 }
-

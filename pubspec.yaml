@@ -77,7 +77,6 @@ flutter:
   assets:
     - assets/images/splash.png
     - assets/images/marriage.png
-    - assets/database/mymatrimony.db
     - assets/images/couple.png
     - assets/images/bride.png
     - assets/images/groom.png
@@ -86,6 +85,7 @@ flutter:
     - assets/images/wedding.png
     - assets/images/hearts.png
     - assets/images/engagement-ring.png
+    - assets/database/mymatrimony.db
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

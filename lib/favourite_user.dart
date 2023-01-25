@@ -173,66 +173,6 @@ class _FavouriteUserPageState extends State<FavouriteUser> {
                                                     SizedBox(
                                                       height: 15,
                                                     ),
-                                                    Container(
-                                                      margin: EdgeInsets.only(left: 50),
-                                                      child: Row(
-                                                        children: [
-                                                          InkWell(
-                                                            onTap: () {
-                                                              setState(() {
-                                                                searchList[index]
-                                                                    .FavouriteUser =
-                                                                !searchList[index]
-                                                                    .FavouriteUser;
-                                                              });
-                                                            },
-                                                            child: Column(
-                                                              children: [
-                                                                Text(
-                                                                  'Add To Favourite',
-                                                                  style: TextStyle(
-                                                                      color: Colors.red,
-                                                                      fontSize: 20),
-                                                                ),
-                                                                Icon(
-                                                                  searchList[index]
-                                                                      .FavouriteUser
-                                                                      ? Icons.favorite
-                                                                      : Icons
-                                                                      .favorite_border_outlined,
-                                                                  color: Colors.red,
-                                                                  size: 30,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          SizedBox(
-                                                            width: 15,
-                                                          ),
-                                                          InkWell(
-                                                            onTap: () {
-                                                              showAlertDialog(
-                                                                  context, index);
-                                                            },
-                                                            child: Column(
-                                                              children: [
-                                                                Text(
-                                                                  'Delete User',
-                                                                  style: TextStyle(
-                                                                      color: Colors.red,
-                                                                      fontSize: 20),
-                                                                ),
-                                                                Icon(
-                                                                  Icons.delete,
-                                                                  color: Colors.red,
-                                                                  size: 30,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
                                                   ],
                                                 )),
                                             Icon(
