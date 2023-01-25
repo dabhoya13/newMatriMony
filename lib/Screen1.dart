@@ -108,6 +108,7 @@ class _Screen1State extends State<Screen1> {
                     ),
                   ),
                   Container(
+                    margin: EdgeInsets.only(top:30),
                     child: Row(
                       children: [
                         avtar('assets/images/couple.png'),
@@ -120,7 +121,7 @@ class _Screen1State extends State<Screen1> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 20),
+                    margin: EdgeInsets.only(top: 40),
                     child: Row(
                       children: [
                         avtar('assets/images/groom.png'),
@@ -133,7 +134,7 @@ class _Screen1State extends State<Screen1> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 20),
+                    margin: EdgeInsets.only(top: 40),
                     child: Row(
                       children: [
                         avtar('assets/images/bride.png'),
@@ -146,21 +147,24 @@ class _Screen1State extends State<Screen1> {
                       ],
                     ),
                   ),
+                  // Container(
+                  //   margin: EdgeInsets.only(top: 20),
+                  //   child: Row(
+                  //     children: [
+                  //       avtar('assets/images/favorite.png'),
+                  //       InkWell(
+                  //         onTap: (){
+                  //           Navigator.of(context).push(MaterialPageRoute(builder: (context) => FavouriteUser(),));
+                  //         },
+                  //         child: button("All Favourite"),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // )
                   Container(
-                    margin: EdgeInsets.only(top: 20),
-                    child: Row(
-                      children: [
-                        avtar('assets/images/favorite.png'),
-                        InkWell(
-                          onTap: (){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => FavouriteUser(),));
-                          },
-                          child: button("All Favourite"),
-                        ),
-                      ],
-                    ),
-                  ),
-
+                    padding: EdgeInsets.only(top: 40,bottom: 20),
+                    child: Image.asset('assets/images/unnamed.webp',scale: 2,),
+                  )
                 ],
               ),
             ),
@@ -209,7 +213,7 @@ class _Screen1State extends State<Screen1> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
               gradient: LinearGradient(
-                colors: GradientColors.harmonicEnergy,
+                colors: GradientColors.bloodyMary,
               ),
             ),
             margin: EdgeInsets.only(left: 20),

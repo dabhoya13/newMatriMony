@@ -84,6 +84,7 @@ flutter:
     - assets/images/giphy.gif
     - assets/images/wedding.png
     - assets/images/hearts.png
+    - assets/images/unnamed.webp
     - assets/images/engagement-ring.png
     - assets/database/mymatrimony.db
 
