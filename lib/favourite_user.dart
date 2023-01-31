@@ -1,18 +1,25 @@
+import 'package:favorite_button/favorite_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
+import 'package:intl/intl.dart';
+import 'package:newmatrimony/Database/database.dart';
 import 'package:newmatrimony/add_user.dart';
-import 'package:newmatrimony/database.dart';
+import 'package:newmatrimony/models/gender_model.dart';
 import 'package:newmatrimony/models/user_model.dart';
+import 'package:newmatrimony/user_list.dart';
+
+
 class FavouriteUser extends StatefulWidget {
   @override
-  State<FavouriteUser> createState() => _FavouriteUserPageState();
+  State<FavouriteUser> createState() => _FavouriteUser();
 }
 
-class _FavouriteUserPageState extends State<FavouriteUser> {
+class _FavouriteUser extends State<FavouriteUser> {
   MyDatabase db = MyDatabase();
   List<UserModel> localList = [];
   List<UserModel> searchList = [];
-  List<UserModel> favouriteList = [];
+  List<GenderModel> genderList = [];
   bool isGetData = true;
   FocusNode myFocusNode = new FocusNode();
   TextEditingController controller = TextEditingController();
@@ -20,11 +27,14 @@ class _FavouriteUserPageState extends State<FavouriteUser> {
   @override
   void initState() {
     super.initState();
+    db.copyPasteAssetFileToRoot().then((value) {
+      db.getUserListFromTbl();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return (Scaffold(
+    return Scaffold(
       appBar: AppBar(
           iconTheme: IconThemeData(
             color: Colors.black, // <-- SEE HERE
@@ -37,26 +47,14 @@ class _FavouriteUserPageState extends State<FavouriteUser> {
           ),
           elevation: 10,
           title: Container(
-            child: Row(
-              children: [
-                Icon(
-                  Icons.menu,
-                  color: Colors.black,
-                  size: 30,
-                ),
-                Expanded(
-                  child: Container(
-                      padding: EdgeInsets.only(left: 20),
-                      height: 70,
-                      width: 70,
-                      child: Tab(
-                          icon: new Image.asset(
-                            "assets/images/marriage.png",
-                          ))),
-                ),
-              ],
-            ),
-          )),
+              margin: EdgeInsets.only(left: 100),
+              padding: EdgeInsets.only(left: 10),
+              height: 70,
+              width: 70,
+              child: Tab(
+                  icon: new Image.asset(
+                    "assets/images/marriage.png",
+                  )))),
       body: SafeArea(
           child: Stack(
             children: [
@@ -130,16 +128,17 @@ class _FavouriteUserPageState extends State<FavouriteUser> {
                                   },
                                   child: Container(
                                     child: Card(
-                                      color: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20.0),
+                                      ),
                                       elevation: 5,
+                                      color: const Color.fromRGBO(34, 33, 91, 1),
                                       borderOnForeground: true,
                                       child: (Container(
                                         padding: EdgeInsets.all(5),
                                         decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(25),
-                                            gradient: LinearGradient(
-                                                colors: GradientColors.overSun,
-                                                begin: Alignment.topLeft)),
+                                          borderRadius: BorderRadius.circular(25),
+                                        ),
                                         child: Row(
                                           children: [
                                             Expanded(
@@ -147,19 +146,37 @@ class _FavouriteUserPageState extends State<FavouriteUser> {
                                                   crossAxisAlignment:
                                                   CrossAxisAlignment.center,
                                                   children: [
-                                                    Text(
-                                                      searchList![index]
-                                                          .UserName
-                                                          .toString(),
-                                                      style: TextStyle(
-                                                          color: Colors.redAccent,
-                                                          fontSize: 30),
+                                                    Container(
+                                                      margin: EdgeInsets.only(left: 10),
+                                                      child: Image.asset(
+                                                        searchList[index].Gender
+                                                        as int ==
+                                                            1
+                                                            ? "assets/images/groom.png"
+                                                            : searchList[index].Gender
+                                                        as int ==
+                                                            2
+                                                            ? "assets/images/bride.png"
+                                                            : "assets/images/wedding.png",
+                                                        height: 60,
+                                                        width: 60,
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      child: Text(
+                                                        searchList![index]
+                                                            .UserName
+                                                            .toString(),
+                                                        style: TextStyle(
+                                                            color: Colors.redAccent,
+                                                            fontSize: 30),
+                                                      ),
                                                     ),
                                                     SizedBox(
                                                       height: 15,
                                                     ),
                                                     Text(
-                                                      searchList![index].DOB.toString(),
+                                                      searchList[index].DOB.toString(),
                                                       style: TextStyle(
                                                           color: Colors.grey.shade500,
                                                           fontSize: 20),
@@ -169,10 +186,139 @@ class _FavouriteUserPageState extends State<FavouriteUser> {
                                                     ),
                                                     Text(
                                                         'Mobile no: ${searchList![index].MobileNo.toString()}',
-                                                        style: TextStyle(fontSize: 20)),
+                                                        style: TextStyle(
+                                                            fontSize: 20,
+                                                            color: Colors.white)),
                                                     SizedBox(
                                                       height: 15,
                                                     ),
+                                                    Container(
+                                                      padding:
+                                                      EdgeInsets.only(left: 25),
+                                                      child: Container(
+                                                        margin:
+                                                        EdgeInsets.only(right: 20),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                          MainAxisAlignment.center,
+                                                          children: [
+                                                            Text(
+                                                              searchList[index].Gender
+                                                              as int ==
+                                                                  1
+                                                                  ? "Male"
+                                                                  :  "Female",
+                                                              style: TextStyle(
+                                                                  color: Colors.white,
+                                                                  fontSize: 15),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 20,
+                                                            ),
+                                                            Text(
+                                                              searchList[index].Religion
+                                                              as int ==
+                                                                  1
+                                                                  ? "Hindu"
+                                                                  : searchList[index]
+                                                                  .Religion
+                                                              as int ==
+                                                                  2
+                                                                  ? "Muslim"
+                                                                  : "Jain",
+                                                              style: TextStyle(
+                                                                  color: Colors.white,
+                                                                  fontSize: 15),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+
+                                                    SizedBox(
+                                                      height: 15,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 20,
+                                                    ),
+                                                    Column(
+                                                      children: [
+                                                        Text(
+                                                          'Delete User',
+                                                          style: TextStyle(
+                                                              color: Colors.red,
+                                                              fontSize: 20),
+                                                        ),
+                                                        GestureDetector(
+                                                          onTap: () {
+                                                            showDialog(
+                                                                context: context,
+                                                                builder:
+                                                                    (BuildContext contex) {
+                                                                  return AlertDialog(
+                                                                    title: Text("Delete"),
+                                                                    content: Text(
+                                                                        "Do you want to delete this record"),
+                                                                    actions: [
+                                                                      Row(
+                                                                        mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                        crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .center,
+                                                                        children: [
+                                                                          ElevatedButton(
+                                                                            onPressed:
+                                                                                () async {
+                                                                              int deletedUserID =
+                                                                              await db.deleteUserFromUserTable(
+                                                                                  localList[index]
+                                                                                      .UserID);
+                                                                              if (deletedUserID >
+                                                                                  0) {
+                                                                                localList
+                                                                                    .removeAt(
+                                                                                    index);
+                                                                              }
+                                                                              ;
+                                                                              setState(() {
+                                                                                Navigator.push(
+                                                                                    context,
+                                                                                    MaterialPageRoute(
+                                                                                        builder: (context) =>
+                                                                                            UserList()));
+                                                                              });
+                                                                            },
+                                                                            child: Text(
+                                                                                "Delete"),
+                                                                          ),
+                                                                          SizedBox(
+                                                                            width: 5,
+                                                                          ),
+                                                                          ElevatedButton(
+                                                                            onPressed: () {
+                                                                              Navigator.of(
+                                                                                  context)
+                                                                                  .pop();
+                                                                            },
+                                                                            child:
+                                                                            Text("No"),
+                                                                          )
+                                                                        ],
+                                                                      )
+                                                                    ],
+                                                                  );
+                                                                });
+                                                          },
+                                                          child: Icon(
+                                                            Icons.delete_rounded,
+                                                            color: Colors.red,
+                                                            size: 30,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    )
                                                   ],
                                                 )),
                                             Icon(
@@ -198,10 +344,10 @@ class _FavouriteUserPageState extends State<FavouriteUser> {
                       ));
                     }
                   },
-                  future: isGetData ? db.getFavouriteUserFromTbl(): null),
+                  future: isGetData ? db.getFavouriteUserFromTbl() : null),
             ],
           )),
-    ));
+    );
   }
 
   showAlertDialog(BuildContext context, index) {

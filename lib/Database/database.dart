@@ -39,6 +39,19 @@ class MyDatabase {
     int deletedid = await db.delete('Tbl_User',where: 'UserID = ?',whereArgs: [userID]);
     return deletedid;
   }
+  Future<void> updateFavouriteUser(int userID, favUser)
+  async {
+    Database db = await initDatabase();
+    Map<String, Object?> map = Map();
+    map['FavouriteUser'] = favUser;
+    if(userID != -1)
+    {
+      await db.update('Tbl_User', map,where: 'UserID = ?',whereArgs: [userID]);
+    }else{
+      await db.insert('Tbl_User', map);
+    }
+
+  }
   Future<void> upsertIntoUserTable({cityId,userName,dob,userId,gender,mobileNo,religion,height})
   async {
     Database db = await initDatabase();
@@ -126,7 +139,7 @@ class MyDatabase {
       model.Religion = data[i]['Religion'] as int;
       model.MobileNo = data[i]['MobileNo'] as int;
       model.Height = data[i]['Height'].toString();
-      model.FavouriteUser= true;
+      model.FavouriteUser = data[i]['FavouriteUser'] as int;
       userList.add(model);
 
     }
@@ -148,7 +161,6 @@ class MyDatabase {
       model.Religion = data[i]['Religion'] as int;
       model.MobileNo = data[i]['MobileNo'] as int;
       model.Height = data[i]['Height'].toString();
-      model.FavouriteUser= false;
       maleUserList.add(model);
 
     }
@@ -170,17 +182,16 @@ class MyDatabase {
       model.Religion = data[i]['Religion'] as int;
       model.MobileNo = data[i]['MobileNo'] as int;
       model.Height = data[i]['Height'].toString();
-      model.FavouriteUser= false;
       femaleUserList.add(model);
 
     }
     return femaleUserList;
   }
   Future<List<UserModel>> getFavouriteUserFromTbl() async {
-    List<UserModel> femaleUserList = [];
+    List<UserModel> favUserList = [];
     Database db = await initDatabase();
     List<Map<String, Object?>> data =
-    await db.rawQuery('select * from Tbl_User where FavouriteUser = 1');
+    await db.rawQuery('select * from Tbl_User where FavouriteUser = 2');
     for(int i=0; i<data.length; i++)
     {
       UserModel model = UserModel();
@@ -192,10 +203,9 @@ class MyDatabase {
       model.Religion = data[i]['Religion'] as int;
       model.MobileNo = data[i]['MobileNo'] as int;
       model.Height = data[i]['Height'].toString();
-      model.FavouriteUser= false;
-      femaleUserList.add(model);
+      favUserList.add(model);
 
     }
-    return femaleUserList;
+    return favUserList;
   }
 }

@@ -7,11 +7,11 @@ class UserModel{
   late int _Religion;
   late String _Height;
   late int _CityID;
-  late bool _FavouriteUser;
+  late int _FavouriteUser;
 
-  bool get FavouriteUser => _FavouriteUser;
+  int get FavouriteUser => _FavouriteUser;
 
-  set FavouriteUser(bool FavouriteUser) {
+  set FavouriteUser(int FavouriteUser) {
     _FavouriteUser = FavouriteUser;
   }
 

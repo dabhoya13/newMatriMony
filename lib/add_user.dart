@@ -5,7 +5,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/intl.dart';
-import 'package:newmatrimony/database.dart';
+import 'package:newmatrimony/Database/database.dart';
 import 'package:newmatrimony/models/city_model.dart';
 import 'package:newmatrimony/models/gender_model.dart';
 import 'package:newmatrimony/models/religion_model.dart';

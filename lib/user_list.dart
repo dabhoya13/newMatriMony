@@ -4,14 +4,13 @@ import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
 import 'package:newmatrimony/add_user.dart';
 import 'package:newmatrimony/Database/database.dart';
 import 'package:newmatrimony/models/user_model.dart';
-import 'package:newmatrimony/user_list.dart';
 
-class MaleUserPage extends StatefulWidget {
+class UserList extends StatefulWidget {
   @override
-  State<MaleUserPage> createState() => _MaleUserPage();
+  State<UserList> createState() => _UserList();
 }
 
-class _MaleUserPage extends State<MaleUserPage> {
+class _UserList extends State<UserList> {
   MyDatabase db = MyDatabase();
   List<UserModel> localList = [];
   List<UserModel> searchList = [];
@@ -150,40 +149,34 @@ class _MaleUserPage extends State<MaleUserPage> {
                                             Expanded(
                                                 child: Stack(
                                                   children: [
-                                                    // Container(
-                                                    //   alignment: Alignment.topRight,
-                                                    //   margin: EdgeInsets.only(top: 10),
-                                                    //   child: InkWell(
-                                                    //     onTap: () {
-                                                    //       setState(() {
-                                                    //         searchList[index]
-                                                    //             .FavouriteUser =
-                                                    //         !searchList[index]
-                                                    //             .FavouriteUser;
-                                                    //         db.updateFav(!searchList[index].FavouriteUser, search[index].UserID.toString());
-                                                    //       });
-                                                    //     },
-                                                    //     child: Column(
-                                                    //       children: [
-                                                    //         Text(
-                                                    //           'Add To Favourite',
-                                                    //           style: TextStyle(
-                                                    //               color: Colors.red,
-                                                    //               fontSize: 20),
-                                                    //         ),
-                                                    //         Icon(
-                                                    //           !searchList[index]
-                                                    //               .FavouriteUser
-                                                    //               ? Icons.favorite
-                                                    //               : Icons
-                                                    //               .favorite_border_outlined,
-                                                    //           color: Colors.red,
-                                                    //           size: 30,
-                                                    //         ),
-                                                    //       ],
-                                                    //     ),
-                                                    //   ),
-                                                    // ),
+                                                    Container(
+                                                      margin: EdgeInsets.only(top:10),
+                                                      alignment: Alignment.topRight,
+                                                      child: InkWell(
+                                                        onTap: () {
+                                                          setState(() {
+                                                            if(searchList[index].FavouriteUser == 1)
+                                                            {
+                                                              searchList[index].FavouriteUser = 2;
+                                                            }
+                                                            else if(searchList[index].FavouriteUser == 2)
+                                                            {
+                                                              searchList[index].FavouriteUser = 1;
+                                                            }
+                                                            db.updateFavouriteUser(searchList[index].UserID, searchList[index].FavouriteUser);
+                                                          });
+                                                        },
+                                                        child: Icon(
+                                                          searchList[index]
+                                                              .FavouriteUser == 2
+                                                              ? Icons.favorite
+                                                              : Icons
+                                                              .favorite_border_outlined,
+                                                          color: Colors.red,
+                                                          size: 50,
+                                                        ),
+                                                      ),
+                                                    ),
                                                     Column(
                                                       crossAxisAlignment:
                                                       CrossAxisAlignment.center,
@@ -324,35 +317,7 @@ class _MaleUserPage extends State<MaleUserPage> {
                                                           EdgeInsets.only(left: 50),
                                                           child: Row(
                                                             children: [
-                                                              // InkWell(
-                                                              //   onTap: () {
-                                                              //     setState(() {
-                                                              //       searchList[index]
-                                                              //               .FavouriteUser =
-                                                              //           !searchList[index]
-                                                              //               .FavouriteUser;
-                                                              //     });
-                                                              //   },
-                                                              //   child: Column(
-                                                              //     children: [
-                                                              //       Text(
-                                                              //         'Add To Favourite',
-                                                              //         style: TextStyle(
-                                                              //             color: Colors.red,
-                                                              //             fontSize: 20),
-                                                              //       ),
-                                                              //       Icon(
-                                                              //         !searchList[index]
-                                                              //                 .FavouriteUser
-                                                              //             ? Icons.favorite
-                                                              //             : Icons
-                                                              //                 .favorite_border_outlined,
-                                                              //         color: Colors.red,
-                                                              //         size: 30,
-                                                              //       ),
-                                                              //     ],
-                                                              //   ),
-                                                              // ),
+
                                                               SizedBox(
                                                                 width: 15,
                                                               ),
@@ -455,7 +420,7 @@ class _MaleUserPage extends State<MaleUserPage> {
                       ));
                     }
                   },
-                  future: isGetData ? db.getMaleUserFromTbl() : null),
+                  future: isGetData ? db.getUserListFromTbl() : null),
             ],
           )),
     ));
