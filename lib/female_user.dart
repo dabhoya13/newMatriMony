@@ -455,7 +455,7 @@ class _FemaleUserPage extends State<FemaleUserPage> {
                       ));
                     }
                   },
-                  future: isGetData ? db.getMaleUserFromTbl() : null),
+                  future: isGetData ? db.getFemaleUserFromTbl() : null),
             ],
           )),
     ));

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:newmatrimony/Screen1.dart';
 import 'package:newmatrimony/add_user.dart';
 import 'package:newmatrimony/api_demo/api_demo.dart';
-import 'package:newmatrimony/first_screen.dart';
 import 'package:newmatrimony/login.dart';
 import 'package:newmatrimony/splash_screen.dart';
 
