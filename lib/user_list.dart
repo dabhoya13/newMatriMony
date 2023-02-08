@@ -289,7 +289,7 @@ class _UserList extends State<UserList> {
                                                                     ),
                                                                     Text(
                                                                       searchList[index]
-                                                                          .Gender
+                                                                          .Religion
                                                                       as int ==
                                                                           1
                                                                           ? "Hindu"
